@@ -163,38 +163,64 @@ const Dashboard = ({ onThemeToggle, isDarkMode }) => {
           width: '100%'
         }}
       >
-        <Box sx={{ mb: 4 }}>
-          <Typography variant="h4" gutterBottom>
-            Welcome, {currentUser?.firstName}!
-          </Typography>
-          <Typography variant="body1" color="text.secondary">
-            Here's what's happening with your platform today.
-          </Typography>
+        <Box sx={{ mb: 4, display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', flexWrap: 'wrap', gap: 2 }}>
+          <Box>
+            <Typography variant="overline" color="text.secondary" fontWeight="bold">
+              OVERVIEW
+            </Typography>
+            <Typography variant="h4" fontWeight="bold" gutterBottom>
+              Welcome back, {currentUser?.firstName || 'User'}!
+            </Typography>
+            <Typography variant="body1" color="text.secondary">
+              Here's what's happening with your platform today.
+            </Typography>
+          </Box>
+          <Box>
+            <Button variant="contained" startIcon={<SettingsIcon />} sx={{ borderRadius: 2 }}>
+              Manage Widgets
+            </Button>
+          </Box>
         </Box>
 
         <Grid container spacing={3}>
           {[
-            { title: 'Total Users', value: '1,245', color: 'primary' },
-            { title: 'Revenue', value: '₹12,450', color: 'success' },
-            { title: 'Active Sessions', value: '342', color: 'info' },
-            { title: 'Pending Tasks', value: '28', color: 'warning' }
+            { title: 'Total Users', value: '1,245', color: 'primary', trend: '+12%'},
+            { title: 'Revenue', value: '₹12,450', color: 'success', trend: '+5.2%' },
+            { title: 'Active Sessions', value: '342', color: 'info', trend: '-2.4%' },
+            { title: 'Pending Tasks', value: '28', color: 'warning', trend: '+8' }
           ].map((metric, index) => (
             <Grid item xs={12} sm={6} md={3} key={index}>
-              <Card>
+              <Card sx={{ height: '100%', position: 'relative', overflow: 'hidden' }}>
                 <CardContent>
-                  <Typography color="text.secondary" gutterBottom>
-                    {metric.title}
-                  </Typography>
-                  <Typography variant="h4" component="div" color={`${metric.color}.main`}>
-                    {metric.value}
-                  </Typography>
+                  <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start' }}>
+                    <Box>
+                      <Typography variant="subtitle2" color="text.secondary" gutterBottom fontWeight="bold">
+                        {metric.title.toUpperCase()}
+                      </Typography>
+                      <Typography variant="h4" component="div" color="text.primary" fontWeight="bold">
+                        {metric.value}
+                      </Typography>
+                      <Typography variant="body2" sx={{ mt: 1, color: metric.trend.startsWith('+') ? 'success.main' : 'error.main', fontWeight: 'bold' }}>
+                        {metric.trend} <Typography component="span" variant="caption" color="text.secondary">from last month</Typography>
+                      </Typography>
+                    </Box>
+                    <Box sx={{ color: `${metric.color}.main` }}>
+                      {metric.icon}
+                    </Box>
+                  </Box>
                 </CardContent>
               </Card>
             </Grid>
           ))}
         </Grid>
 
-        <Grid container spacing={3} sx={{ mt: 2 }}>
+        <Box sx={{ mt: 4 }}>
+          <Typography variant="h5" gutterBottom fontWeight="bold">
+            Analytics & Performance
+          </Typography>
+        </Box>
+
+        <Grid container spacing={3} sx={{ mt: 0 }}>
           {[1, 2, 3, 4, 5, 6].map((item) => (
             <Grid item xs={12} sm={6} md={4} key={item}>
               <Card>
