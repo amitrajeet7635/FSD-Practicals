@@ -32,14 +32,21 @@ cd Exp4
 npm install
 ```
 
-### 2. Run the Tests
+### 2. View the Live UI
+To see and interact with these components in your browser, run the Vite development server:
+```bash
+npm run dev
+```
+Then, click the local link (usually `http://localhost:5173`) in your terminal.
+
+### 3. Run the Tests
 To execute the test suite once and see the results:
 
 ```bash
 npm test
 ```
 
-### 3. Run Tests in Watch Mode (Recommended for Development)
+### 4. Run Tests in Watch Mode (Recommended for Development)
 To keep Jest running in the background so it automatically runs tests whenever you modify a file:
 
 ```bash
